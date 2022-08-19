@@ -1,23 +1,41 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { PrismaClient } from '@prisma/client';
 
+const prisma = new PrismaClient();
 
 
 const typeDefs = gql`
-  type Query{
-    hello: String
+  type User {
+    id: ID!
+    email: String
+    name: String
+  }
+  type Query {
+    hello: String,
+    users: [User],
   }
 `;
 
+interface Context {
+  prisma: PrismaClient
+}
+
 const resolvers = {
   Query: {
-    hello: () => 'Hello World'
+    hello: () => 'Hello World',
+    users: async (parent: undefined, args: {}, context: Context) => {
+      return await context.prisma.user.findMany();
+    }
   }
 }
 
 const apolloServer = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: {
+    prisma
+  },
 })
 
 const startServer = apolloServer.start()
@@ -39,7 +57,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   await startServer;
   await apolloServer.createHandler({
-    path: 'api/graphql'
+    path: '/api/graphql'
   })(req, res)
 };
 
