@@ -1,7 +1,22 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { gql, useQuery } from '@apollo/client';
+
+const GET_USERS = gql`
+    query GetUsers {
+        users {
+            id
+            email
+            name
+        }
+    }
+`
 
 export default function Home() {
+    const {data, loading, error} = useQuery(GET_USERS)
+    if(loading) return <p>loading中です</p>
+    if(error) return <p>errorが発生しました</p>
+    const { users } = data
   return (
     <div className="container">
       <Head>
@@ -15,6 +30,12 @@ export default function Home() {
         <button>カフェを探す</button>
 
         <Link href="/posts/1">koko</Link>
+          <div>
+            <h2>user info</h2>
+              {users.map((user: {id: number, name: string, email: string}) => (
+                  <div key={user.id}>Name: {user.name}</div>
+              ))}
+          </div>
       </main>
 
       <footer>
