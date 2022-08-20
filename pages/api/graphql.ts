@@ -10,10 +10,34 @@ const typeDefs = gql`
     id: ID!
     email: String
     name: String
+    cafe: [String]
+  }
+  type Cafe {
+    id: Int
+    name: String
+    master: String
+    masterId: Int
+    menus: [Menu]!
+    lat: Float
+    lon: Float
+    isWifi: Boolean
+    isConcent: Boolean
+  }
+  type Menu {
+    id: Int
+    name: String
+    prise: Int
+    image: String
+    cafe: String
+    cafeId: Int
+    isIce: Boolean
+    isHot: Boolean
   }
   type Query {
     hello: String,
     users: [User],
+    cafes: [Cafe],
+    menus: [Menu],
   }
 `;
 
@@ -26,6 +50,12 @@ const resolvers = {
     hello: () => 'Hello World',
     users: async (parent: undefined, args: {}, context: Context) => {
       return await context.prisma.user.findMany();
+    },
+    cafes: async (parent: undefined, args: {}, context: Context) => {
+      return await context.prisma.cafe.findMany();
+    },
+    menus: async (parent: undefined, args: {}, context: Context) => {
+      return await context.prisma.menu.findMany();
     }
   }
 }

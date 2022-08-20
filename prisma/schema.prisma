@@ -14,4 +14,28 @@ model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
+  Cafe  Cafe[]
+}
+
+model Cafe {
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  master    User    @relation(fields: [masterId], references: [id])
+  masterId  Int
+  menus     Menu[]
+  lat       Float
+  lon       Float
+  isWifi    Boolean @default(false)
+  isConcent Boolean @default(false)
+}
+
+model Menu {
+  id     Int     @id @default(autoincrement())
+  name   String
+  prise  Int
+  image  String
+  cafe   Cafe    @relation(fields: [cafeId], references: [id])
+  cafeId Int
+  isIce  Boolean @default(false)
+  isHot  Boolean @default(false)
 }

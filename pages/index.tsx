@@ -12,6 +12,15 @@ const GET_USERS = gql`
     }
 `
 
+// const GET_CAFE = gql`
+//     query GetCafe {
+//         cafe {
+//             id
+//             name
+//         }
+//     }
+// `
+
 export default function Home() {
     const {data, loading, error} = useQuery(GET_USERS)
     if(loading) return <p>loading中です</p>
