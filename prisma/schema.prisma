@@ -33,7 +33,7 @@ model Menu {
   id     Int     @id @default(autoincrement())
   name   String
   prise  Int
-  image  String
+  image  String?
   cafe   Cafe    @relation(fields: [cafeId], references: [id])
   cafeId Int
   isIce  Boolean @default(false)

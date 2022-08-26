@@ -52,7 +52,11 @@ const resolvers = {
       return await context.prisma.user.findMany();
     },
     cafes: async (parent: undefined, args: {}, context: Context) => {
-      return await context.prisma.cafe.findMany();
+      return await context.prisma.cafe.findMany({
+        include: {
+          menus: true
+        }
+      });
     },
     menus: async (parent: undefined, args: {}, context: Context) => {
       return await context.prisma.menu.findMany();
