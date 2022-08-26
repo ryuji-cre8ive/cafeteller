@@ -27,6 +27,8 @@ model Cafe {
   lon       Float
   isWifi    Boolean @default(false)
   isConcent Boolean @default(false)
+  assesment Float @default(3)
+  image String?
 }
 
 model Menu {
@@ -38,4 +40,5 @@ model Menu {
   cafeId Int
   isIce  Boolean @default(false)
   isHot  Boolean @default(false)
+  assesment Float   @default(3)
 }

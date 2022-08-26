@@ -4,22 +4,14 @@ import { gql, useQuery } from '@apollo/client';
 
 const GET_USERS = gql`
     query GetUsers {
-        users {
+        users{
             id
-            email
             name
+            email
         }
     }
 `
 
-// const GET_CAFE = gql`
-//     query GetCafe {
-//         cafe {
-//             id
-//             name
-//         }
-//     }
-// `
 
 export default function Home() {
     const {data, loading, error} = useQuery(GET_USERS)
@@ -34,9 +26,10 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>Welcome to Cafeteller</h1>
-        <p>このサービスはカフェをリコメンドするサービスです</p>
-        <button>カフェを探す</button>
+        <h1>あなたの好きなカフェがきっと見つかる</h1>
+        <p>このサービスはお気に入りのカフェを見つけてもらうサービスです</p>
+          <Link href='/posts/all'><button>カフェを探す</button></Link>
+
 
         <Link href="/posts/1">koko</Link>
           <div>

@@ -22,6 +22,8 @@ const typeDefs = gql`
     lon: Float
     isWifi: Boolean
     isConcent: Boolean
+    assesment: Float
+    image: String
   }
   type Menu {
     id: Int
@@ -32,6 +34,7 @@ const typeDefs = gql`
     cafeId: Int
     isIce: Boolean
     isHot: Boolean
+    assesment: Float
   }
   type Query {
     hello: String,

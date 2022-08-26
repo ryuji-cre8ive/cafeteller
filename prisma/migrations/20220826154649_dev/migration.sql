@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Cafe" ADD COLUMN     "assesment" DOUBLE PRECISION NOT NULL DEFAULT 3;
+
+-- AlterTable
+ALTER TABLE "Menu" ADD COLUMN     "assesment" DOUBLE PRECISION NOT NULL DEFAULT 3;
