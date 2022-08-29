@@ -19,7 +19,7 @@ const GET_CAFE = gql`
 interface CafeAll {
     name: string,
     menus: string[],
-    assesment: float,
+    assesment: number,
     image?: string
 }
 
